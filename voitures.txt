@@ -1,0 +1,25 @@
+1,Ford,Focus,Petrol,7,Manual,83.95,0
+2,Chevrolet,Volt,Electric,6,Automatic,59.34,0
+3,Nissan,Altima,Petrol,4,Automatic,98.69,1
+4,Mercedes,C-Class,Electric,6,Automatic,57.15,0
+5,Chevrolet,Cruze,Electric,6,Automatic,99.09,0
+6,BMW,320i,Petrol,6,Automatic,77.25,1
+7,Nissan,GTR,Hybrid,4,Manual,84.12,0
+8,Renault,Clio,Electric,7,Manual,38.73,1
+9,Honda,Accord,Diesel,4,Manual,94.76,0
+10,BMW,5 Series,Diesel,4,Manual,71.38,0
+11,Toyota,Corolla,Petrol,6,Manual,75.77,1
+12,BMW,7 Series,Electric,5,Manual,92.83,1
+13,Kia,Stinger,Hybrid,4,Manual,69.94,0
+14,Nissan,Altima,Diesel,7,Automatic,35.02,0
+15,Toyota,Rio,Petrol,7,Automatic,93.10,0
+16,Nissan,Leaf,Hybrid,4,Automatic,74.94,1
+17,Nissan,Sentra,Diesel,5,Automatic,92.88,1
+18,Hyundai,Civic,Electric,7,Automatic,44.04,0
+19,BMW,X5,Hybrid,4,Manual,93.05,0
+20,Renault,Twingo,Electric,6,Manual,82.18,1
+21,Ford,Mustang,Petrol,4,Manual,53.31,0
+22,BMW,3 Series,Diesel,5,Automatic,51.91,1
+23,BMW,5 Series,Electric,4,Manual,41.39,1
+24,Hyundai,Kona,Petrol,4,Manual,83.80,0
+25,Ford,GT40,Hybrid,7,Manual,66.37,0
