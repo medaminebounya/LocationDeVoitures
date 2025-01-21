@@ -30,11 +30,10 @@ void ajouterVoiture(Voiture voitures[], int *nbVoitures) {
     (*nbVoitures)++;
     printf("Voiture ajoutee avec succes !\n");
 }
+
 // Fonction pour supprimer une voiture en fonction de son ID
-void supprimerVoiture(Voiture voitures[], int *nbVoitures,int ID){
+void supprimerVoiture(Voiture voitures[], int *nbVoitures, int ID) {
     int i, indexASupprimer = -1;
-    printf("Entrez l'ID de la voiture à modifier : ");
-    scanf("%d", &ID);
     for (i = 0; i < *nbVoitures; i++) {
         if (voitures[i].ID == ID) {
             indexASupprimer = i;
@@ -42,24 +41,23 @@ void supprimerVoiture(Voiture voitures[], int *nbVoitures,int ID){
         }
     }
     if (indexASupprimer == -1) {
-        printf("Voiture avec l'ID %d non trouvée.\n", ID);
+        printf("Voiture avec l'ID %d non trouvÃ©e.\n", ID);
         return;
     }
     for (i = indexASupprimer; i < *nbVoitures - 1; i++) {
         voitures[i] = voitures[i + 1];
     }
     (*nbVoitures)--;
-    printf("Voiture avec l'ID %d a été supprimée avec succès.\n", ID);
+    printf("Voiture avec l'ID %d a Ã©tÃ© supprimÃ©e avec succÃ¨s.\n", ID);
 }
 
 // Afficher toutes les voitures
 void afficherVoitures(Voiture voitures[], int nbVoitures) {
+    int i;
     if (nbVoitures == 0) {
         printf("Aucune voiture disponible.\n");
         return;
     }
-
-    int i;
     for (i = 0; i < nbVoitures; i++) {
         printf("%d. %s %s, %s, %d places, %s, %.2f MAD, %s\n",
                voitures[i].ID,
@@ -68,7 +66,7 @@ void afficherVoitures(Voiture voitures[], int nbVoitures) {
                voitures[i].Carb,
                voitures[i].Seat,
                voitures[i].Trans,
-               voitures[i].Prix_Loca, //Prix location par jour
+               voitures[i].Prix_Loca,
                voitures[i].Dispo ? "Disponible" : "Indisponible");
     }
 }
@@ -76,12 +74,12 @@ void afficherVoitures(Voiture voitures[], int nbVoitures) {
 // Rechercher une voiture
 void chercherVoiture(Voiture voitures[], int nbVoitures) {
     char marqueRecherchee[50];
-    int trouve = 0;
+    int trouve = 0,i;
 
     printf("Entrez la marque de la voiture : ");
     scanf("%s", marqueRecherchee);
     printf("Resultat(s) de la recherche :\n");
-    for (int i = 0; i < nbVoitures; i++) {
+    for (i = 0; i < nbVoitures; i++) {
         if ((strcmp(voitures[i].Marque, marqueRecherchee) == 0) && voitures[i].Dispo == 1) {
             afficherUneVoiture(voitures[i]);
             trouve = 1;
@@ -93,7 +91,7 @@ void chercherVoiture(Voiture voitures[], int nbVoitures) {
     }
 }
 
-//Affiche une seule voiture
+// Afficher une seule voiture
 void afficherUneVoiture(Voiture voiture) {
     printf("ID: %d\n", voiture.ID);
     printf("Marque: %s\n", voiture.Marque);
@@ -106,23 +104,23 @@ void afficherUneVoiture(Voiture voiture) {
     printf("-------------------------\n");
 }
 
-//Fonction pour modifier les infos de la voiture
+// Fonction pour modifier les infos de la voiture
 void modifierVoiture(Voiture voitures[], int *nbVoitures) {
-    int id, i,trouve = 0;
-    printf("Entrez l'ID de la voiture à modifier : ");
+    int id, i, trouve = 0;
+    printf("Entrez l'ID de la voiture Ã  modifier : ");
     scanf("%d", &id);
     for (i = 0; i < *nbVoitures; i++) {
         if (voitures[i].ID == id) {
             trouve = 1;
-            //Afficher la voiture qu'on va modifier ses donnees
-            printf("Détails actuels de la voiture avec l'ID %d :\n", id);
+            // Afficher la voiture qu'on va modifier
+            printf("DÃ©tails actuels de la voiture avec l'ID %d :\n", id);
             afficherUneVoiture(voitures[i]);
 
             printf("Entrez la nouvelle Marque : ");
             scanf("%s", voitures[i].Marque);
-            printf("Entrez le nouveau Propriétaire (User) : ");
+            printf("Entrez le nouveau PropriÃ©taire (User) : ");
             scanf("%s", voitures[i].User);
-            printf("Entrez le nouveau Modèle : ");
+            printf("Entrez le nouveau ModÃ¨le : ");
             scanf("%s", voitures[i].Model);
             printf("Entrez le nouveau Type de Carburant : ");
             scanf("%s", voitures[i].Carb);
@@ -132,56 +130,59 @@ void modifierVoiture(Voiture voitures[], int *nbVoitures) {
             scanf("%s", voitures[i].Trans);
             printf("Entrez le nouveau Prix de Location : ");
             scanf("%f", &voitures[i].Prix_Loca);
-            printf("Entrez la nouvelle Disponibilité (1 pour disponible, 0 pour non) : ");
+            printf("Entrez la nouvelle DisponibilitÃ© (1 pour disponible, 0 pour non) : ");
             scanf("%d", &voitures[i].Dispo);
-            break;
         }
     }
     if (!trouve) {
-        printf("Aucune voiture trouvée avec l'ID %d.\n", id);
+        printf("Aucune voiture trouvÃ©e avec l'ID %d.\n", id);
         return;
     }
-    FILE *fichier = fopen("voitures.txt", "r+");
+    FILE *fichier = fopen("voitures.txt", "w"); // ouvrir en mode "w" pour Ã©craser le fichier
+    if (!fichier) {
+        printf("Erreur d'ouverture du fichier !\n");
+        return;
+    }
     for (i = 0; i < *nbVoitures; i++) {
-        fprintf(fichier, "%d %s %s %s %s %d %s %.2f %d\n",
+        fprintf(fichier, "%d,%s,%s,%s,%d,%s,%.2f,%d\n",
                 voitures[i].ID,
                 voitures[i].Marque,
                 voitures[i].User,
                 voitures[i].Model,
-                voitures[i].Carb,
                 voitures[i].Seat,
                 voitures[i].Trans,
                 voitures[i].Prix_Loca,
                 voitures[i].Dispo);
     }
     fclose(fichier);
-    printf("Les détails de la voiture ont été mis à jour avec succès !\n");
+    printf("Les dÃ©tails de la voiture ont Ã©tÃ© mis Ã  jour avec succÃ¨s !\n");
 }
 
 // Trier les voitures par marque
 void trierVoitures(Voiture voitures[], int nbVoitures) {
     int i, j;
-    for (i = 0; i < nbVoitures - 1; i++) { //0 => 98
-        for (j = i + 1; j < nbVoitures; j++) { //1 => 99
-            if (strcmp(voitures[i].Marque, voitures[j].Marque) > 0 && (voitures[i].Prix_Loca < voitures[j].Prix_Loca)) {
-                Voiture temp = voitures[i];
+    Voiture temp;
+    for (i = 0; i < nbVoitures - 1; i++) {
+        for (j = i + 1; j < nbVoitures; j++) {
+            if (strcmp(voitures[i].Marque, voitures[j].Marque) > 0 ||
+                (strcmp(voitures[i].Marque, voitures[j].Marque) == 0 && voitures[i].Prix_Loca > voitures[j].Prix_Loca)) {
+                temp = voitures[i];
                 voitures[i] = voitures[j];
                 voitures[j] = temp;
             }
         }
     }
-    printf("Voitures triees par marque.\n");
+    printf("Voitures triees par marque et/ou Prix de location par jour.\n");
 }
 
 // Sauvegarder dans un fichier CSV
-void sauvegarderDansCSV(char *nomFichier,Voiture voitures[], int nbVoitures) {
-    FILE *file = fopen(nomFichier, "w");
+void sauvegarderDansCSV(Voiture voitures[], int nbVoitures) {
+    FILE *file = fopen("voitures.txt", "w");
+    int i;
     if (!file) {
         printf("Erreur lors de l'ouverture du fichier.\n");
         return;
     }
-
-    int i;
     for (i = 0; i < nbVoitures; i++) {
         fprintf(file, "%d,%s,%s,%s,%d,%s,%.2f,%d\n",
                 voitures[i].ID,
@@ -195,20 +196,20 @@ void sauvegarderDansCSV(char *nomFichier,Voiture voitures[], int nbVoitures) {
     }
 
     fclose(file);
-    printf("Voitures sauvegardees dans le fichier %s.\n", nomFichier);
+    printf("Voitures sauvegardees dans le fichier voitures.txt.\n");
 }
 
 // Charger les voitures depuis un fichier
-int chargerVoituresDepuisFichier(char *nomFichier, Voiture voitures[], int *nbVoitures) {
-    FILE *file = fopen(nomFichier, "r");
+int chargerVoituresDepuisFichier(Voiture voitures[], int *nbVoitures) {
+    FILE *file = fopen("voitures.txt", "r");
+    int i = 0;
     if (!file) {
-        printf("Erreur lors de l'ouverture du fichier %s.\n", nomFichier);
-        return 0;
+        printf("Erreur lors de l'ouverture du fichier voitures.txt.\n");
+        return -1;
     }
 
     *nbVoitures = 0;
-    int i = 0;
-    while (fscanf(file, "%d,%24[^,],%24[^,],%9[^,],%d,%9[^,],%f,%d\n", //24 Buffer limit pour fscanf to prevent overflow
+    while (fscanf(file, "%d,%24[^,],%24[^,],%9[^,],%d,%9[^,],%f,%d\n",
                   &voitures[i].ID,
                   voitures[i].Marque,
                   voitures[i].Model,
@@ -218,11 +219,9 @@ int chargerVoituresDepuisFichier(char *nomFichier, Voiture voitures[], int *nbVo
                   &voitures[i].Prix_Loca,
                   &voitures[i].Dispo) == 8) {
         i++;
-        (*nbVoitures)++; //prevents logical errors and ensures the integrity of the data loaded from the file.
+        (*nbVoitures)++;
     }
 
     fclose(file);
-    return 1;
+    return 0;
 }
-
-

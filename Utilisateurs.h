@@ -11,8 +11,8 @@ typedef struct {
 } Utilisateur;
 
 // Declarations des fonctions
-int authentifierUtilisateur(char *nomFichier, char *username, char *role);
-int ajouterUtilisateur(char *nomFichier, Utilisateur utilisateur);
-int chargerUtilisateursDepuisFichier(char *nomFichier, Utilisateur utilisateurs[], int *nbUtilisateurs);
+int authentifierUtilisateur(char *username, char *role);
+int ajouterUtilisateur(Utilisateur utilisateur);
+int chargerUtilisateursDepuisFichier(Utilisateur utilisateurs[], int *nbUtilisateurs);
 
 #endif

@@ -22,9 +22,9 @@ void afficherVoitures(Voiture voitures[], int nbVoitures);
 void chercherVoiture(Voiture voitures[], int nbVoitures);
 void afficherUneVoiture(Voiture voiture);
 void trierVoitures(Voiture voitures[], int nbVoitures);
-void sauvegarderDansCSV(char *nomFichier, Voiture voitures[], int nbVoitures);
-int chargerVoituresDepuisFichier(char *nomFichier, Voiture voitures[], int *nbVoitures);
+void sauvegarderDansCSV(Voiture voitures[], int nbVoitures);
+int chargerVoituresDepuisFichier(Voiture voitures[], int *nbVoitures);
 void modifierVoiture(Voiture voitures[], int *nbVoitures);
-void supprimerVoiture(Voiture voitures[], int *nbVoitures,int ID);
+void supprimerVoiture(Voiture voitures[], int *nbVoitures, int ID);
 
 #endif

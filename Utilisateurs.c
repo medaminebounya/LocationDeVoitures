@@ -3,20 +3,17 @@
 #include "utilisateurs.h"
 
 // Fonction pour authentifier un utilisateur
-#include <stdio.h>
-#include <string.h>
 
-int authentifierUtilisateur(char *nomFichier, char *username, char *role) {
-    char ligne[100];
-    char nomUtilisateur[25], motDePasse[25], roleUtilisateur[13], motDePasseEntre[25];
+int authentifierUtilisateur(char *username, char *role) {
+    char ligne[100],nomUtilisateur[25], motDePasse[25], roleUtilisateur[13], motDePasseEntre[25];
 
-    FILE *fichier = fopen(nomFichier, "r");
+    FILE *fichier = fopen("utilisateurs.txt","r");
     if (!fichier) {
         printf("Erreur lors de l'ouverture du fichier !\n");
         return 0;
     }
 
-    // Demander à l'utilisateur de saisir son nom d'utilisateur et mot de passe
+    // Demander Ã  l'utilisateur de saisir son nom d'utilisateur et mot de passe
     printf("Entrez votre nom d'utilisateur : ");
     scanf("%s", username);
     printf("Entrez votre mot de passe : ");
@@ -24,27 +21,27 @@ int authentifierUtilisateur(char *nomFichier, char *username, char *role) {
 
     // Parcours du fichier pour chercher une correspondance
     while (fgets(ligne, sizeof(ligne), fichier)) {
-        ligne[strcspn(ligne, "\n")] = 0; // Enlever le retour à la ligne
+        ligne[strcspn(ligne, "\n")] = 0; // Enlever le retour Ã  la ligne
 
-        // Découper la ligne en parties : nom d'utilisateur, mot de passe et rôle
+        // DÃ©couper la ligne en parties : nom d'utilisateur, mot de passe et rÃ´le
         if (sscanf(ligne, "%[^,],%[^,],%s", nomUtilisateur, motDePasse, roleUtilisateur) == 3) {
-            // Vérifier si le nom d'utilisateur et le mot de passe correspondent
+            // VÃ©rifier si le nom d'utilisateur et le mot de passe correspondent
             if (strcmp(nomUtilisateur, username) == 0 && strcmp(motDePasse, motDePasseEntre) == 0) {
-                strcpy(role, roleUtilisateur);  // Copier le rôle de l'utilisateur
+                strcpy(role, roleUtilisateur);  // Copier le rÃ´le de l'utilisateur
                 fclose(fichier);
-                return 1;  // Authentification réussie
+                return 1;  // Authentification rÃ©ussie
             }
         }
     }
 
     fclose(fichier);
     printf("Nom d'utilisateur ou mot de passe incorrect !\n");
-    return 0;  // Échec de l'authentification
+    return 0;  // Ã‰chec de l'authentification
 }
 
 // Fonction pour ajouter un nouvel utilisateur
-int ajouterUtilisateur(char *nomFichier, Utilisateur utilisateur) {
-    FILE *fichier = fopen(nomFichier, "a");
+int ajouterUtilisateur(Utilisateur utilisateur) {
+    FILE *fichier = fopen("utilisateurs.txt", "a");
     if (!fichier) {
         printf("Erreur lors de l'ouverture du fichier pour ecriture !\n");
         return 0;
@@ -59,12 +56,12 @@ int ajouterUtilisateur(char *nomFichier, Utilisateur utilisateur) {
 }
 
 // Fonction pour charger tous les utilisateurs depuis le fichier
-int chargerUtilisateursDepuisFichier(char *nomFichier, Utilisateur utilisateurs[], int *nbUtilisateurs) {
+int chargerUtilisateursDepuisFichier(Utilisateur utilisateurs[], int *nbUtilisateurs) {
     *nbUtilisateurs = 0;  // Initialise le nombre d'utilisateurs a zero
     char ligne[100];
     int i = 0;
 
-    FILE *fichier = fopen(nomFichier, "r");
+    FILE *fichier = fopen("utilisateurs.txt", "r");
     if (!fichier) {
         printf("Erreur lors de l'ouverture du fichier !\n");
         return 0;
